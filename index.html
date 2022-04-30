@@ -1,443 +1,336 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Faculty Minds Distress Tolerance Test</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <style>
-            div.sticky {
-              position: -webkit-sticky;
-              position: sticky;
-              top: 0;
-              /* background-color: grey; */
-              font-size: 20px;
-            }
-            .container {
-             display: flex; /* or inline-flex */
-             flex-direction: column
-            }
-            #submitButton {
-                margin-bottom: 3em
-            }
-            .background {
-                background-color: #dee2e6;
-            }
-        </style>
-    </head>
-    <body class="background">
-        <div id="welcome" class="container px-4 overflow-hidden">
-            <h1>Welcome to Faculty Minds Distress Tolerance Test</h1>
-            <h4 class="text-danger">For testing purposes only</h4>
-            <form>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
-                <label for="firstNameInput">First Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name">
-                <label for="lastNameInput">Last Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
-                <label for="passwordInput">Password</label>
-              </div>
-              <div id="error"></div>
-              <div class="form-floating mb-3">
-                <button type="button" class="btn btn-primary" onclick="logInClicked()">Log In</button>
-              </div>
-              </form>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="m-4" id="questionnaire">
+        <h1>Welcome to Faculty Minds</h1>
+        <h5>Introduction:</h5>
+        <p>Dear participant, I am Shreemant Laxmanrao Yadav, a practicing psychotherapist and couple therapist. I am pursuing my PhD in the area of couples and marriage under the guidance of Dr. Umesh Bharte, Assistant Professor, from Department of Applied Psychology, University of Mumbai. This research is related to my doctoral research.</p>
+        <p><b>Research Objective:</b> The research study is aimed at understanding working professionals. The study aims to understand the self-perceptions of individuals. It attempts to analyze how individuals relate to others. It also tries to articulate how individuals deal with various inconveniences and hurdles of their life. Through this it attempts to get a view of their adaptability. The research also aims to, in part, to understand an individual’s interactional patterns with their spouse. The purpose is to help working professionals and individuals to build healthy interactional patterns and to develop a robust interventional strategy through the knowledge attained from this research.</p>
+        <p><b>Ethical Guidelines:</b> In this study, you would be filling out three scales and one test that would take about 30 – 45 Minutes of your time. There are no risks associated with this study. You are under no compulsion to participate in this study and should feel free to decline. If you agree to participate, please be aware that you are free to withdraw at any point throughout the duration of the study. These questions are to gather information in a survey style. Your participation will be anonymous and all information will be kept confidential. If for any reason during this study you do not feel comfortable, you may stop. When this study is complete you will be provided with the results of the research study if you request and you will be free to ask any questions. If you have any further questions concerning this study, please feel free to ask now. The study will be used for research and publication purposes only.
+        </p>
+        <p><b>Consent: </b>I agree to take part in this study, which has been explained to me. I have been given an opportunity to ask questions about the study. I understand that any questions I answer will be anonymous, and that my identity will not be disclosed at any point. I also understand that my participation is completely voluntary, and I may withdraw from the study at any time. I am 18 years old or over, and I am legally able to provide consent.
+        </p>
+        <h6>Kindly tick mark in the following boxes if you fit the below mentioned criteria:</h6>
+    
+        <form>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Currently in an active marriage (Not separated or filed for divorce)" id="activeMarriage" required>
+                <label class="form-check-label" for="activeMarriage">
+                    Currently in an active marriage (Not separated or filed for divorce)
+                </label>
             </div>
-        <div id="questionnaire" class="container px-4 overflow-hidden d-none">
-            <div class="row d-inline-flex p-2 justify-content-center">
-                <h1>Faculty Minds 16PF Test</h1>
-                <h4 class="text-danger">For testing purposes only</h4>
-            </div>  
-            <div class="row">
-                <p>Rules:</p>
-                <ul class="list-group">
-                    <li class="list-group-item text-danger">*For testing purposes: This form will submit even if all the answers are not selected.* </li>
-                    <li class="list-group-item">You must answer all questions to be able to submit the form. </li>
-                    <!-- <li class="list-group-item">You may not select more than 12 Answer B's. </li>
-                    <li class="list-group-item">The box on the top right corner will display the number of B's selected.</li>-->
-                    <li class="list-group-item">Ideally, you shouldnt take more than 35 mins to complete this test. </li> 
-                  </ul>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="3+ years of marriage" id="3yearMarriage" required>
+                <label class="form-check-label" for="3yearMarriage">
+                    3+ years of marriage
+                </label>
             </div>
-            <div class="row">
-                <form>
-                    <div class="col-md-auto row gx-5" id="questions"></div>
-                </form>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Full time employed with 5+ years of work experience" id="fullTime" required>
+                <label class="form-check-label" for="fullTime">
+                    Full time employed with 5+ years of work experience
+                </label>
             </div>
-            <div class="row gx-5" id="results">
-                <!-- After submit is clicked -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Between 30 to 45 years age group" id="30To45AgeGroup" required>
+                <label class="form-check-label" for="30To45AgeGroup">
+                    Between 30 to 45 years age group
+                </label>
             </div>
-            <div class="row mt-4">
-                <p class="text-danger" id="submitBtnErrMsg">
-                <!-- Reason why submit button cannot be clicked.  -->
-                </p>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Resident of India" id="residentOfIndia" required>
+                <label class="form-check-label" for="residentOfIndia">
+                    Resident of India
+                </label>
             </div>
-            <div class="row d-inline-flex p-10 justify-content-center gy-5">
-                <button id="submitButton" type="button" class="btn btn-primary" onclick="submitClicked()">Submit</button> 
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Corporate Employee" id="corporateEmployee" required>
+                <label class="form-check-label" for="corporateEmployee">
+                    Corporate Employee
+                </label>
             </div>
-        </div>
-        <div id="thankyou" class="container px-4 overflow-hidden d-none">
-            <p class="lead mt-4">
-                Thank You for taking the test. Your results have been sent for analysis. You will be contacted shortly. Please quit your browser. 
-              </p>
-        </div>
-        <!-- <script src="distressToleranceQuestions.js"></script> --> 
-        <script type ="text/javascript">
-            let firstName = '';
-            let lastName = '';
-            let questionEl = document.getElementById('questions');
-            let questionsInHTML = '';
-            let pointsPerCategory = [
-                {category: 'TO', points: 0},
-                {category: 'AB', points: 0},
-                {category: 'AP', points: 0},
-                {category: 'RE', points: 0}
-            ]
-            // To lerance: 1 3 5
-            // Ab sorption: 2 4 15
-            // Ap praisal: 6* 7 9 10 11 12 
-            // Re gultion 8 13 14
-            let finalQuestions = [
-                {
-                "personalityTrait": "TO",
-                "questionNumber": 1,
-                "questionDetails": "Feeling distressed or upset is unbearable to me",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AB",
-                "questionNumber": 2,
-                "questionDetails": "When I feel distressed or upset, all I can think about is how bad I feel",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "TO",
-                "questionNumber": 3,
-                "questionDetails": "I can’t handle feeling bad or distressed",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AB",
-                "questionNumber": 4,
-                "questionDetails": "My feelings of distress are so intense that they completely take over. 5.There’s nothing worse than feeling distressed or upset",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "TO",
-                "questionNumber": 5,
-                "questionDetails": "There’s nothing worse than feeling distressed or upset",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AP",
-                "questionNumber": 6,
-                "questionDetails": "I can tolerate being distressed or upset",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 5,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 4,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 2,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 1
-                },
-                {
-                "personalityTrait": "AP",
-                "questionNumber": 7,
-                "questionDetails": "My feelings of being distressed or upset are not acceptable",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "RE",
-                "questionNumber": 8,
-                "questionDetails": "I’ll do anything to avoid feeling upset or distressed",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AP",
-                "questionNumber": 9,
-                "questionDetails": "Other people seem to be able to tolerate feeling distressed or upset better than I can",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AP",
-                "questionNumber": 10,
-                "questionDetails": "Being distressed or upset is always a major ordeal for me",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AP",
-                "questionNumber": 11,
-                "questionDetails": "I am ashamed of myself when I feel distressed or upset",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AP",
-                "questionNumber": 12,
-                "questionDetails": "My feelings of distressed or being upset scare me",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "RE",
-                "questionNumber": 13,
-                "questionDetails": "I’ll do anything to stop feeling distressed or upset",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "RE",
-                "questionNumber": 14,
-                "questionDetails": "When I feel distressed or upset, I must do something about it immediately",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                },
-                {
-                "personalityTrait": "AB",
-                "questionNumber": 15,
-                "questionDetails": "When I feel distressed or upset, I cannot help but concentrate on how bad the distress actually feels",
-                "answerA": "Strongly Agree",
-                "answerAPoints": 1,
-                "answerB": "Mildly Agree",
-                "answerBPoints": 2,
-                "answerC": "Agree and Disagree Equally",
-                "answerCPoints": 3,
-                "answerD": "Mildly Disagree",
-                "answerDPoints": 4,
-                "answerE": "Strongly Disagree",
-                "answerEPoints": 5
-                }
-            ]
-            finalQuestions.map(function (question) {
-                let html = 
-                `<p id="${question.questionNumber}" class="m-2">${question.questionNumber}. ${question.questionDetails}</p>
-                <ul class="list-group m-4">
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" value=${question.answerAPoints} aria-label="${question.answerA}">
-                        ${question.answerA}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}B" value=${question.answerBPoints} aria-label="${question.answerB}">
-                        ${question.answerB}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}C" value=${question.answerCPoints} aria-label="${question.answerC}">
-                        ${question.answerC}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}D" value=${question.answerDPoints} aria-label="${question.answerD}">
-                        ${question.answerD}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}E" value=${question.answerEPoints} aria-label="${question.answerE}">
-                        ${question.answerE}
-                    </li>
-                </ul>
-                `
-                questionsInHTML += html;
-                return;
-            });
-            questionEl.innerHTML = questionsInHTML;
-
-            // Logging into form. Will start timer here. 
-            function logInClicked() {
-                firstName = document.getElementById('firstNameInput').value;
-                lastName = document.getElementById('lastNameInput').value;
-                let pass = document.getElementById("passwordInput").value;
-                if (pass == "aadi") {
-                    document.getElementById('welcome').classList.add('d-none');
-                    document.getElementById('questionnaire').classList.remove('d-none');
-                } else {
-                document.getElementById("error").innerHTML = `<div class="alert alert-danger" role="alert">
-                    Wrong password entered. Please try again.</div>`
-                }
-                // Get start time
-                startTime = new Date().getTime();
-                // console.log('startTime: ' + startTime)
-            }
+            <div class="form-row">
+                <div class="mt-4">
+                    <label for="participantSign">Participant Signature: </label><input type="text" id="participantSign" class="form-control" placeholder="Full Name in Capital letters" required>
+                </div>
+            </div>
+            <h6 class="mt-4">Demographic Details:</h6>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="fullName">Full Name: Mr. /Mrs.</label><input type="text" id="fullName" class="form-control" placeholder="Full Name in Capital letters" required>
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="age">Age:</label><input type="text" id="age" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="gender">Gender:</label><input type="text" id="gender" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="dob">DOB:</label><input type="text" id="dob" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="spouseName">Spouse Name:</label><input type="text" id="spouseName" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-floating mt-4">
+                <p>Does your spouse hold a full-time working position, Please provide details:</p>
+                <textarea class="form-control mt-4" placeholder="Leave a comment here" id="spouseDetails" required></textarea>
+            </div>
+            <p class="form-row mt-4">Please click the correct box:</p>
+            <div class="btn-group" role="group" aria-label="Marriage Radio Toggle">
+                    <input class="form-check-input btn-check" type="radio" name="statusMarriage" id="Married" value="Married" required>
+                    <label class="form-check-label btn btn-outline-primary" for="Married">Married</label>
+                    <input class="form-check-input btn-check" type="radio" name="statusMarriage"  id="Separated" value="Separated" required>
+                    <label class="form-check-label btn btn-outline-primary" for="Separated">Separated</label>
+                    <input class="form-check-input btn-check" type="radio" name="statusMarriage"  id="Divorced" value="Divorced" required>
+                    <label class="form-check-label btn btn-outline-primary" for="Divorced">Divorced</label>
+            </div>
+            <p class="form-row mt-4">Please click the correct box:</p>
+            <div class="btn-group" role="group" aria-label="Count Marriage">
+                    <input class="form-check-input btn-check" type="radio" name="countMarriage" id="1Marriage" value="1st Marriage">
+                    <label class="form-check-label btn btn-outline-primary" for="1Marriage">1st Marriage</label>
+                    <input class="form-check-input btn-check" type="radio" name="countMarriage" id="2Marriage" value="2nd Marriage">
+                    <label class="form-check-label btn btn-outline-primary" for="2Marriage">2nd Marriage</label>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="yearsOfMarriage">Years of Current Marriage:</label><input type="text" id="yearsOfMarriage" class="form-control">
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="arrangedLove">Arranged / Love:</label><input type="text" id="arrangedLove" class="form-control">
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="religion">Religion:</label><input type="text" id="religion" class="form-control">
+                </div>
+            </div>
+            <p class="form-row mt-4">Family:</p>
+            <div class="btn-group" role="group" aria-label="Family Type">
+                <input class="form-check-input btn-check" type="checkbox" name="family" id="joint" value="Joint">
+                <label class="form-check-label btn btn-outline-primary" for="joint">Joint</label>
+                <input class="form-check-input btn-check" type="checkbox" name="family" id="nuclear" value="Nuclear">
+                <label class="form-check-label btn btn-outline-primary" for="nuclear">Nuclear</label>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="children">No. Of Children:</label><input type="text" id="children" class="form-control">
+                </div>
+            </div>
+            <div class="form-row mt-1">
+                <label for="inputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
             
-            function submitClicked(){   
-                let isQuestionAnswered;
-                let answeredQuestions = [];
-                document.getElementById('submitButton').disabled = true;             
-                for (let i = 1; i < finalQuestions.length+1; i++) {
-                    for(let j = 0; j < pointsPerCategory.length; j++){
-                        let elName = i + pointsPerCategory[j].category;
-                        let mcq = document.getElementsByName(elName);
-                        for (let k = 0; k < mcq.length; k++) {
-                            isQuestionAnswered = false
-                            if(mcq[k].checked){
-                                pointsPerCategory[j].points += parseInt(mcq[k].value)
-                                isQuestionAnswered = true
-                                answeredQuestions.push(i)
-                            }
-                        }
-                    }
-                } 
-                if (answeredQuestions.length < 15) {
-                    let count = 15;
-                    let missing = [];
+            <div class="form-row mt-4">
+                <div>
+                    <label for="contact">Contact:</label><input type="text" id="contact" class="form-control">
+                </div>
+            </div>
 
-                    for (var i = 1; i <= count; i++) {
-                        if (answeredQuestions.indexOf(i) == -1) {
-                            missing.push(i);
-                        }
-                    }
-                    document.getElementById('submitBtnErrMsg').innerHTML = "Please answer these questions: " + missing.join(', ')
-                    alert('You must answer all questions in order to submit quiz.');
-                } else {
-                    sendResultsToSpreadsheet();
-                }
+            <div class="form-row mt-4">
+                <div>
+                    <label for="city">City:</label><input type="text" id="city" class="form-control">
+                </div>
+            </div>
+            <div class="form-floating mt-4">
+                <p>Address:</p>
+                <textarea class="form-control mt-4" placeholder="Leave a comment here" id="address"></textarea>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="education">Education:</label><input type="text" id="education" class="form-control">
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="profession">Profession:</label><input type="text" id="profession" class="form-control">
+                </div>
+            </div>
+            <div class="form-row mt-4">
+                <div>
+                    <label for="organizationName">Organization Name (Optional):</label><input type="text" id="orgName" class="form-control">
+                </div>
+            </div>
+            <div class="form-check mt-4">
+                <input class="form-check-input" type="radio" name="employmentStatus" value="Self employed" id="selfEmployed">
+                <label class="form-check-label" for="selfEmployed">
+                    Self employed
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="employmentStatus" value="Self Employed Professional" id="selfEmployedProfessional">
+                <label class="form-check-label" for="selfEmployedProfessional">
+                    Self Employed Professional 
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="employmentStatus" value="Employed in a Business" id="employedInBusiness">
+                <label class="form-check-label" for="employedInBusiness">
+                    Employed in a Business
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="employmentStatus" value="Entrepreneur or Business Owner " id="entrepreneurOrBusinessOwner">
+                <label class="form-check-label" for="entrepreneurOrBusinessOwner">
+                    Entrepreneur or Business Owner 
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="employmentStatus" value="Government Employee " id="governmentEmployee">
+                <label class="form-check-label" for="governmentEmployee">
+                    Government Employee 
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="employmentStatus" value="" id="corporateEmployee">
+                <label class="form-check-label" for="corporateEmployee">
+                    Corporate Employee
+                </label>
+            </div>
+            <div class="form-row">
+                <div class="mt-4">
+                    <label for="participantSignature">Participant Signature: </label><input type="text" id="participantSignature" class="form-control" placeholder="Full Name in Capital letters">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="mt-4">
+                    <label for="date">Date: </label><input type="text" id="date" class="form-control" placeholder="Todays date">
+                </div>
+            </div>
+            <div class="form-row d-inline-flex mt-4">
+                <button id="submitButton" type="submit" class="btn btn-primary" onclick="submitClicked()">Submit</button> 
+            </div>
+        </form>
+    </div>
+    <div id="thankyou" class="container px-4 overflow-hidden d-none">
+        <p class="lead mt-4">
+           Ready to Start the study? 
+          </p>
+          <a class="btn btn-primary" role="button" href="./1SCS/index.html">Start Test</a>
+    </div>
+    <script>
+        function submitClicked(){
+
+            // const inputFeilds = document.querySelectorAll("input");
+
+            // const validInputs = Array.from(inputFeilds).filter( input => input.value === "");
+
+            // console.log(validInputs)
+
+            localStorage.setItem('fullName', document.getElementById('fullName').value)
+
+            document.getElementById('submitButton').disabled = true; 
+            // family
+            let familyValue;
+            if (document.getElementById('joint').checked) {
+                familyValue = document.getElementById('joint').value;
+            } else if(document.getElementById('nuclear').checked) {
+                familyValue = document.getElementById('nuclear').value;
             }
-            // Send Results to Google Spreadsheet
-            function sendResultsToSpreadsheet(){
-                let dataToSend = {
-                    "firstName":firstName,
-                    "lastName":lastName,
-                    "TO": pointsPerCategory[0].points,
-                    "AB": pointsPerCategory[1].points,
-                    "AP": pointsPerCategory[2].points,
-                    "RE": pointsPerCategory[3].points
-                }
-                fetch("https://api.apispreadsheets.com/data/CbdBfoshAonUcDsG/", {
-                    method: "POST",
-                    body: JSON.stringify({"data": dataToSend}),
-                }).then(res =>{
-                    if (res.status === 201){
-                        // SUCCESS
-                        console.log('Success')
-                    }
-                    else{
-                        // ERROR
-                        console.log('Error')
-                    }
-                })
-                setTimeout(function () {
-                    document.getElementById('questionnaire').classList.add('d-none');
-                    document.getElementById('thankyou').classList.remove('d-none');
-                }, 5000);
+
+            let marriageValue;
+            if (document.getElementById('1Marriage').checked) {
+                marriageValue = document.getElementById('1Marriage').value;
+            } else if(document.getElementById('2Marriage').checked) {
+                marriageValue = document.getElementById('2Marriage').value;
             }
-        </script>
-    </body>
+
+            let employmentStatus;
+            if (document.getElementById('selfEmployed').checked) {
+                employmentStatus = document.getElementById('selfEmployed').value;
+            } else if(document.getElementById('selfEmployedProfessional').checked) {
+                employmentStatus = document.getElementById('selfEmployedProfessional').value;
+            } else if(document.getElementById('employedInBusiness').checked) {
+                employmentStatus = document.getElementById('employedInBusiness').value;
+            } else if(document.getElementById('entrepreneurOrBusinessOwner').checked) {
+                employmentStatus = document.getElementById('entrepreneurOrBusinessOwner').value;
+            } else if(document.getElementById('governmentEmployee').checked) {
+                employmentStatus = document.getElementById('governmentEmployee').value;
+            } else if(document.getElementById('corporateEmployee').checked) {
+                employmentStatus = document.getElementById('corporateEmployee').value;
+            } 
+
+            let relationshipStatus;
+            if (document.getElementById('Married').checked) {
+                relationshipStatus = document.getElementById('Married').value;
+            } else if(document.getElementById('Separated').checked) {
+                relationshipStatus = document.getElementById('Separated').value;
+            } else if(document.getElementById('Divorced').checked) {
+                relationshipStatus = document.getElementById('Divorced').value;
+            }
+
+            let dataToSend = {
+                "age": document.getElementById("age").value,
+                "dob": document.getElementById("dob").value,
+                "city":document.getElementById("city").value,
+                "date":document.getElementById("date").value,
+                "email":document.getElementById("inputEmail1").value,
+                "family":familyValue,
+                "gender":document.getElementById("gender").value,
+                "address":document.getElementById("address").value,
+                "contact":document.getElementById("contact").value,
+                "orgName":document.getElementById("orgName").value,
+                "children":document.getElementById("children").value,
+                "fullName":document.getElementById("fullName").value,
+                "fullTime":document.getElementById("fullTime").value,
+                "marriage":marriageValue,
+                "religion":document.getElementById("religion").value,
+                "education":document.getElementById("education").value,
+                "profession":document.getElementById("profession").value,
+                "spouseName":document.getElementById("spouseName").value,
+                "arrangedLove":document.getElementById("arrangedLove").value,
+                "3yearMarriage":document.getElementById("3yearMarriage").value,
+                "spouseDetails":document.getElementById("spouseDetails").value,
+                "30To45AgeGroup":document.getElementById("30To45AgeGroup").value,
+                "activeMarriage":document.getElementById("activeMarriage").value,
+                "participantSign":document.getElementById("participantSign").value,
+                "residentOfIndia":document.getElementById("residentOfIndia").value,
+                "yearsOfMarriage":document.getElementById("yearsOfMarriage").value,
+                "employmentStatus":employmentStatus,
+                "corporateEmployee":document.getElementById("corporateEmployee").value,
+                "relationshipStatus":relationshipStatus,
+                "participantSignature":document.getElementById("participantSignature").value
+            }
+            sendResultsToSpreadsheet(dataToSend)
+        }
+        function sendResultsToSpreadsheet(dataToSend){
+            console.log('hello')
+            console.log(dataToSend)
+            fetch("https://api.apispreadsheets.com/data/tI8wdBf2qe3vIlU5/", {
+                method: "POST",
+                body: JSON.stringify({"data": dataToSend}),
+            }).then(res =>{
+                if (res.status === 201){
+                    // SUCCESS
+                }
+                else{
+                    // ERROR
+                }
+            })
+            setTimeout(function () {
+                document.getElementById('thankyou').classList.remove('d-none');
+                document.getElementById('questionnaire').classList.add('d-none');
+            }, 5000);
+        }
+    </script>
+</body>
 </html>

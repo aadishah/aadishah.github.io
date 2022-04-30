@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Faculty Minds PWB Test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <style>
+            div.sticky {
+              position: -webkit-sticky;
+              position: sticky;
+              top: 0;
+              /* background-color: grey; */
+              font-size: 20px;
+            }
+            .container {
+             display: flex; /* or inline-flex */
+             flex-direction: column
+            }
+            #submitButton {
+                margin-bottom: 3em
+            }
+            .background {
+                background-color: #dee2e6;
+            }
+
+            .likert {
+                --likert-rows: 7;
+                display: inline-grid;
+                grid-auto-rows: 1fr;
+                gap: 1em;
+                grid-template-columns: repeat(var(--likert-rows), minmax(0, 1fr));
+            }
+            
+            @media only screen and (max-width: 680px) {
+                .likert {
+                    grid-template-columns: minmax(0, 400px);
+                    justify-content: center;
+                }
+            }
+            
+            .likert input {
+                max-width: 250px;
+                position: fixed;
+                opacity: 0;
+                pointer-events: none;
+            }
+            
+            
+            .likert span {
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+                padding: 15px;
+                background: #dcdcdc;
+                transition: background .2s ease-in-out;
+            }
+            
+            .likert input:checked + span {
+                outline: black auto 1px;
+                background: transparent;
+            }
+            
+            .likert input:focus + span {
+                outline: -webkit-focus-ring-color auto 1px;
+            }
+            
+            .likert span:hover {
+                background: #f1f1f1;
+                outline: lightgrey auto 0.5px;
+            }
+        </style>
+    </head>
+    <body class="background">
+        <div id="questionnaire" class="container px-4 overflow-hidden">
+            <div class="row d-inline-flex p-2 justify-content-center">
+                <h1>Faculty Minds MAT Test</h1>
+                <h4 class="text-danger">For testing purposes only</h4>
+            </div>  
+            <div class="row">
+                <p>Rules:</p>
+                <ul class="list-group">
+                    <li class="list-group-item text-danger">*For testing purposes: This form will submit even if all the answers are not selected.* </li>
+                    <li class="list-group-item">You must answer all questions to be able to submit the form. </li>
+                  </ul>
+            </div>
+            <div class="row">
+                <form>
+                    <div class="col-md-auto row gx-5" id="questions"></div>
+                </form>
+            </div>
+            <div class="row gx-5" id="results">
+                <!-- After submit is clicked -->
+            </div>
+            <div class="row mt-4">
+                <p class="text-danger" id="submitBtnErrMsg">
+                <!-- Reason why submit button cannot be clicked.  -->
+                </p>
+            </div>
+            <div class="row d-inline-flex p-10 justify-content-center gy-5">
+                <button id="submitButton" type="button" class="btn btn-primary" onclick="submitClicked()">Submit</button> 
+            </div>
+        </div>
+        <div id="thankyou" class="container px-4 overflow-hidden d-none">
+            <p class="lead mt-4">
+                Thank You for taking the test. Your results have been sent for analysis. You will be contacted shortly. Please quit your browser. 
+              </p>
+        </div>
+        <!-- <script src="distressToleranceQuestions.js"></script> --> 
+        <script type ="text/javascript">
+            let firstName = '';
+            let lastName = '';
+            let questionEl = document.getElementById('questions');
+            let questionsInHTML = '';
+            let totalPoints;
+            // Add Question1 
+            questionsInHTML = ` 
+            <label id="1" class="m-2 standard">1. Seclect degree of Happiness</label>
+            <div class="likert">
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1A" value=0 aria-label="Very Unhappy">
+                    <span>Very Unhappy</span>
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1B" value=2 aria-label=".">
+                    <span>.</span>
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1C" value=7 aria-label=".">
+                    <span>.</span>
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1D" value=15 aria-label="Happy">
+                    <span>Happy</span>
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1E" value=20 aria-label=".">
+                    <span>.</span>
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1F" value=25 aria-label=".">
+                    <span>.</span>
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1G" value=35 aria-label="Perfectly Happy">
+                    <span>Perfectly Happy</span>
+                </label>
+            </div>`;
+            // Questions 2 -9 
+            let questions2To9 = [
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 2,
+                    "questionDetails": "Handling Family Finances",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 5,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 4,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 3,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 2,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                },
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 3,
+                    "questionDetails": "Matters of Recreation",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 5,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 4,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 3,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 2,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                },
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 4,
+                    "questionDetails": "Demonstration of Affection",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 8,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 6,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 4,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 2,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                },
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 5,
+                    "questionDetails": "Friends",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 5,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 4,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 3,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 2,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                },
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 6,
+                    "questionDetails": "Sex Relations",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 15,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 12,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 9,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 4,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                },
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 7,
+                    "questionDetails": "Conventionality (right, good, or proper conduct)",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 5,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 4,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 3,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 2,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                },
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 8,
+                    "questionDetails": "Philosophy of Life",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 5,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 4,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 3,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 2,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                },
+                {
+                    "personalityTrait": "ALL",
+                    "questionNumber": 9,
+                    "questionDetails": "Ways of dealing with in-laws",
+                    "answerA": "Always Agree",
+                    "answerAPoints": 5,
+                    "answerB": "Almost Always Agree",
+                    "answerBPoints": 4,
+                    "answerC": "Occasionally Disagree",
+                    "answerCPoints": 3,
+                    "answerD": "Frequently Disagree",
+                    "answerDPoints": 2,
+                    "answerE": "Almost Always Disagree",
+                    "answerEPoints": 1,
+                    "answerF": "Always Disagree",
+                    "answerFPoints": 0
+                }
+            ];
+            questions2To9.map(function (question) {
+                let questions2To9Html = 
+                `<label id="${question.questionNumber}" class="m-2 standard">${question.questionNumber}. ${question.questionDetails}</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" value=${question.answerAPoints} aria-label="${question.answerA}">
+                        <span>${question.answerA}</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}B" value=${question.answerBPoints} aria-label="${question.answerB}">
+                        <span>${question.answerB}</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}C" value=${question.answerCPoints} aria-label="${question.answerC}">
+                        <span>${question.answerC}</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}D" value=${question.answerDPoints} aria-label="${question.answerD}">
+                        <span>${question.answerD}</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}E" value=${question.answerEPoints} aria-label="${question.answerE}">
+                        <span>${question.answerE}</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}F" value=${question.answerFPoints} aria-label="${question.answerF}">
+                        <span>${question.answerF}</span>
+                    </label>
+                </div>`
+                questionsInHTML += questions2To9Html;
+                return;
+            });
+            let question10 = ` 
+                <label id="10" class="m-2 standard">10. When disagreements arise, they usually result in:</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="10ALL" id="10A" value=0 aria-label="Husband giving in">
+                        <span>Husband giving in</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="10ALL" id="10B" value=2 aria-label="Wife giving in">
+                        <span>Wife giving in</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="10ALL" id="10C" value=10 aria-label="Agreememt by mutual give and take">
+                        <span>Agreememt by mutual give and take</span>
+                    </label>
+                </div>`;
+            
+            // Add question 10 to html
+            questionsInHTML += question10
+            let question11 = ` 
+                <label id="11" class="m-2 standard">11. Do you and your mate engage in outside interests together?</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="11ALL" id="11A" value=10 aria-label="All of them">
+                        <span>All of them</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="11ALL" id="11B" value=8 aria-label="Some of them">
+                        <span>Some of them</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="11ALL" id="11C" value=3 aria-label="Very few of them">
+                        <span>Very few of them</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="11ALL" id="11D" value=0 aria-label="None of them">
+                        <span>None of them</span>
+                    </label>
+                </div>`;
+            // Add question 11 to html
+            questionsInHTML += question11
+            let question12 = ` 
+                <label id="12" class="m-2 standard">12. In leisure time: (Tick the appropriate option)</label><br>
+                <label id="12" class="m-2 standard">a. Do you generally prefer:</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="12AALL" id="12AA" value="youGO" aria-label='To be "on the go"'>
+                        <span>To be "on the go"</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="12AALL" id="12AB" value="youHome" aria-label="To stay at home?">
+                        <span>To stay at home?</span>
+                    </label>
+                </div>
+                <label id="12" class="m-2 standard">b. Does your mate generally prefer:</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="12BALL" id="12BA" value="mateGo" aria-label='To be "on the go"'>
+                        <span>To be "on the go"</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="12BALL" id="142BB" value="mateHome" aria-label="To stay at home?">
+                        <span>To stay at home?</span>
+                    </label>
+                </div>`;
+
+            // Add question 12 to html
+            questionsInHTML += question12
+            let question13 = ` 
+                <label id="13" class="m-2 standard">13. Do you ever wish you had not married?</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="13ALL" id="13A" value=0 aria-label="Frequently">
+                        <span>Frequently</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="13ALL" id="13B" value=0 aria-label="Occasionally">
+                        <span>Occasionally</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="13ALL" id="13C" value=0 aria-label="Rarely">
+                        <span>Rarely</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="13ALL" id="13D" value=0 aria-label="Never">
+                        <span>Never</span>
+                    </label>
+                </div>`;
+            let question14 = ` 
+                <label id="14" class="m-2 standard">14. If you had your life to live over, do you think you would:</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="14ALL" id="14A" value=15 aria-label="Marry the same person">
+                        <span>Marry the same person</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="14ALL" id="14B" value=9 aria-label="Marry a different person">
+                        <span>Marry a different person</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="14ALL" id="14C" value=1 aria-label="Not marry at all">
+                        <span>Not marry at all</span>
+                    </label>
+                </div>`;
+            let question15 = ` 
+                <label id="15" class="m-2 standard">15. Do you confide in your mate:</label>
+                <div class="likert">
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="15ALL" id="15A" value=0 aria-label="Almost never">
+                        <span>Almost never</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="15ALL" id="15B" value=2 aria-label="Rarely">
+                        <span>Rarely</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="15ALL" id="15C" value=10 aria-label="In most things">
+                        <span>In most things</span>
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="15ALL" id="15D" value=10 aria-label="In everything">
+                        <span>In everything</span>
+                    </label>
+                </div>`;
+
+            // Add into html
+            questionEl.innerHTML = questionsInHTML;
+            
+            function submitClicked(){   
+                let answeredQuestions = [];
+                document.getElementById('submitButton').disabled = true;  
+
+
+                for (let i = 1; i<15; i++){
+                    let elName = i + "ALL";
+                    let mcq = document.getElementsByName(elName);
+                    for (let k = 0; k < mcq.length; k++) {
+                        if(mcq[k].checked){
+                            totalPoints += parseInt(mcq[k].value)
+                            answeredQuestions.push(i)
+                        }
+                    }
+                }
+                // For 12 A 
+                let answer12A = document.getElementsByName("12AALL"); // youGo youHome
+                let answer12B = document.getElementsByName("12BALL"); //mateGo mateHome
+                let finalAnswer12A;
+                let finalAnswer12B;
+                
+                // go through 12 a
+                for (let k = 0; k < answer12A.length; k++) {
+                    if(answer12A[k].checked){
+                        finalAnswer12A = answer12A[k].value
+                    }
+                }
+                // For 12 B
+                for (let i = 0; i < answer12B.length; i++) {
+                    if(answer12B[i].checked){
+                        finalAnswer12B = answer12B[i].value
+                    }
+                }
+
+                if(finalAnswer12A == "youGo" && finalAnswer12B == "mateGo") {
+                    totalPoints += 3
+                } else if(finalAnswer12A == "youHome" && finalAnswer12B == "mateHome") {
+                    totalPoints += 10
+                }else if((finalAnswer12A == "youHome" && finalAnswer12B == "mateGo")&&(finalAnswer12A == "youGo" && finalAnswer12B == "mateHome")){
+                    totalPoints += 2
+                }
+                 
+                if (answeredQuestions.length < 15) {
+                    let count = 15;
+                    let missing = [];
+
+                    for (var i = 1; i <= count; i++) {
+                        if (answeredQuestions.indexOf(i) == -1) {
+                            missing.push(i);
+                        }
+                    }
+                    document.getElementById('submitBtnErrMsg').innerHTML = "Please answer these questions: " + missing.join(', ')
+                    alert('You must answer all questions in order to submit quiz.');
+                } else {
+                    sendResultsToSpreadsheet();
+                }
+            }
+            // Send Results to Google Spreadsheet
+            function sendResultsToSpreadsheet(){
+                let dataToSend = {
+                    "firstName":firstName,
+                    "lastName":lastName,
+                    "TO": pointsPerCategory[0].points,
+                    "AB": pointsPerCategory[1].points,
+                    "AP": pointsPerCategory[2].points,
+                    "RE": pointsPerCategory[3].points
+                }
+                fetch("https://api.apispreadsheets.com/data/CbdBfoshAonUcDsG/", {
+                    method: "POST",
+                    body: JSON.stringify({"data": dataToSend}),
+                }).then(res =>{
+                    if (res.status === 201){
+                        // SUCCESS
+                        console.log('Success')
+                    }
+                    else{
+                        // ERROR
+                        console.log('Error')
+                    }
+                })
+                setTimeout(function () {
+                    document.getElementById('questionnaire').classList.add('d-none');
+                    document.getElementById('thankyou').classList.remove('d-none');
+                }, 5000);
+            }
+        </script>
+    </body>
+</html>
