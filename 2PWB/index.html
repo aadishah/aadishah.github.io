@@ -107,13 +107,18 @@
         </div>
         <div id="thankyou" class="container px-4 overflow-hidden d-none">
             <p class="lead mt-4">
-                Thank You for taking the test. Your results have been sent for analysis. You will be contacted shortly. Please quit your browser. 
-              </p>
+               Go to Next Test? 
+            </p>
+            <a class="btn btn-primary" role="button" href="../3MAT/index.html">Start Test</a>
         </div>
         <script src="PWBQuestions.js"></script>
         <script type ="text/javascript">
             let questionEl = document.getElementById('questions');
             let questionsInHTML = '';
+            let isQuestionAnswered;
+            let answeredQuestions = [];
+            let selectedAnswers = [];
+            let totalPoints;
             let pointsPerCategory = [
                 {category: 'AUTO', points: 0}, // Autonomy: 1, 7, 13, 19, 25, 31, 37
                 {category: 'ENVMAS', points: 0}, // Environmental Mastery: 2, 8, 14, 20, 26, 32, 38	
@@ -157,10 +162,6 @@
             questionEl.innerHTML = questionsInHTML;
 
             function submitClicked(){   
-
-                let isQuestionAnswered;
-                let answeredQuestions = [];
-                let selectedAnswers = [];
                 document.getElementById('submitButton').disabled = true;             
                 for (let i = 1; i < finalQuestions.length+1; i++) {
                     for(let j = 0; j < pointsPerCategory.length; j++){
@@ -170,7 +171,7 @@
                             isQuestionAnswered = false
                             if(mcq[k].checked){
                                 // Get value selected
-                                let answerChecked = mcq[k].getAttribute("id") + ': ' + mcq[k].getAttribute("aria-label") + '. ';
+                                let answerChecked = i + ': ' + mcq[k].getAttribute("aria-label") + '. ';
                                 selectedAnswers += answerChecked
                                 //Get Points
                                 pointsPerCategory[j].points += parseInt(mcq[k].value)
@@ -180,19 +181,14 @@
                         }
                     }
                 } 
-                console.log(selectedAnswers)
-                let totalPoints = pointsPerCategory.map(item => item.points).reduce((prev, curr) => prev + curr, 0);
-
-                let scsData = localStorage.getItem('scsData')
-
-                console.log(scsData)
-
+                totalPoints = pointsPerCategory.map(item => item.points).reduce((prev, curr) => prev + curr, 0);
                 if (answeredQuestions.length < finalQuestions.length) {
                     let count = finalQuestions.length;
                     let missing = [];
 
                     for (var i = 1; i <= count; i++) {
                         if (answeredQuestions.indexOf(i) == -1) {
+                            document.getElementById(i).innerHTML += `<span class="bg-danger">Required!</span>`
                             missing.push(i);
                         }
                     }
@@ -206,32 +202,29 @@
             // Send Results to Google Spreadsheet
             function sendResultsToSpreadsheet(){
                 
-                let fullName = localStorage.getItem('fullName')
-                let scsData = localStorage.getItem('scsData')
+                let scsData = JSON.parse(localStorage.getItem('scsData'));
 
-                console.log(scsData)
-                // let dataToSend = {
-                //     "firstName":localStorage.getItem('firstName'),
-                //     "lastName":localStorage.getItem('lastName'),
-                //     "AUTO": pointsPerCategory[0].points,
-                //     "ENVMAS": pointsPerCategory[1].points,
-                //     "PERSGROW": pointsPerCategory[2].points,
-                //     "POSIREL": pointsPerCategory[3].points,
-                //     "PIL": pointsPerCategory[4].points,
-                //     "SELFAC": pointsPerCategory[5].points,
-                //     "TOTAL": totalPoints,
-                //     "IND": localStorage.getItem('IND'),
-                //     "MEANIND": localStorage.getItem('MEANIND'),
-                //     "INT": localStorage.getItem('INT'),
-                //     "MEANINT": localStorage.getItem('MEANINT'),
-                //     "COM": localStorage.getItem('COM')
-                // }
-                dataToSend = {
-                    "COM":"","IND":"","INT":"","PIL":"","AUTO":"","TOTAL":"","ENVMAS":"","SELFAC":"","MEANIND":"","MEANINT":"","POSIREL":"","PERSGROW":"","fullName":"","PWB Selected Answers":"","SCS Selected Answers":""}
+                let dataToSend = {
+                    "COM":scsData.COM,
+                    "IND":scsData.IND,
+                    "INT":scsData.INT,
+                    "PIL":pointsPerCategory[4].points,
+                    "AUTO":pointsPerCategory[0].points,
+                    "TOTAL":totalPoints,
+                    "ENVMAS":pointsPerCategory[1].points,
+                    "SELFAC":pointsPerCategory[5].points,
+                    "MEANIND":scsData.MEANIND,
+                    "MEANINT":scsData.MEANINT,
+                    "POSIREL":pointsPerCategory[3].points,
+                    "PERSGROW":pointsPerCategory[2].points,
+                    "fullName":localStorage.getItem('fullName'),
+                    "PWB Selected Answers":selectedAnswers,
+                    "SCS Selected Answers":scsData.scsAnswers
+                }
 
                 fetch("https://api.apispreadsheets.com/data/H0Swcn8e7V5ezc6u/", { // SCS + PWB 
                     //method: "POST",
-                    body: JSON.stringify({"data": dataTosend}),
+                    body: JSON.stringify({"data":dataToSend}),
                 }).then(res =>{
                     if (res.status === 201){
                         // SUCCESS

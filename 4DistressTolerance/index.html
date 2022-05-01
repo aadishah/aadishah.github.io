@@ -24,8 +24,9 @@
             .background {
                 background-color: #dee2e6;
             }
+
             .likert {
-                --likert-rows: 6;
+                --likert-rows: 7;
                 display: inline-grid;
                 grid-auto-rows: 1fr;
                 gap: 1em;
@@ -74,35 +75,63 @@
                 background: #f1f1f1;
                 outline: lightgrey auto 0.5px;
             }
-        
+
+            .likert {
+                --likert-rows: 5;
+                display: inline-grid;
+                grid-auto-rows: 1fr;
+                gap: 1em;
+                grid-template-columns: repeat(var(--likert-rows), minmax(0, 1fr));
+            }
+            
+            @media only screen and (max-width: 680px) {
+                .likert {
+                    grid-template-columns: minmax(0, 400px);
+                    justify-content: center;
+                }
+            }
+            
+            .likert input {
+                max-width: 250px;
+                position: fixed;
+                opacity: 0;
+                pointer-events: none;
+            }
+            
+            
+            .likert span {
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+                padding: 15px;
+                background: #dcdcdc;
+                transition: background .2s ease-in-out;
+            }
+            
+            .likert input:checked + span {
+                outline: black auto 1px;
+                background: transparent;
+            }
+            
+            .likert input:focus + span {
+                outline: -webkit-focus-ring-color auto 1px;
+            }
+            
+            .likert span:hover {
+                background: #f1f1f1;
+                outline: lightgrey auto 0.5px;
+            }
         </style>
     </head>
     <body class="background">
-        <div id="welcome" class="container px-4 overflow-hidden">
-            <h1>Welcome to Faculty Minds Distress Tolerance Test</h1>
-            <h4 class="text-danger">For testing purposes only</h4>
-            <form>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
-                <label for="firstNameInput">First Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name">
-                <label for="lastNameInput">Last Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
-                <label for="passwordInput">Password</label>
-              </div>
-              <div id="error"></div>
-              <div class="form-floating mb-3">
-                <button type="button" class="btn btn-primary" onclick="logInClicked()">Log In</button>
-              </div>
-              </form>
-            </div>
-        <div id="questionnaire" class="container px-4 overflow-hidden d-none">
+        <div id="questionnaire" class="container px-4 overflow-hidden">
             <div class="row d-inline-flex p-2 justify-content-center">
-                <h1>Faculty Minds 16PF Test</h1>
+                <h1>Faculty Minds DTS Test</h1>
                 <h4 class="text-danger">For testing purposes only</h4>
             </div>  
             <div class="row">
@@ -110,9 +139,6 @@
                 <ul class="list-group">
                     <li class="list-group-item text-danger">*For testing purposes: This form will submit even if all the answers are not selected.* </li>
                     <li class="list-group-item">You must answer all questions to be able to submit the form. </li>
-                    <!-- <li class="list-group-item">You may not select more than 12 Answer B's. </li>
-                    <li class="list-group-item">The box on the top right corner will display the number of B's selected.</li>-->
-                    <li class="list-group-item">Ideally, you shouldnt take more than 35 mins to complete this test. </li> 
                   </ul>
             </div>
             <div class="row">
@@ -134,13 +160,11 @@
         </div>
         <div id="thankyou" class="container px-4 overflow-hidden d-none">
             <p class="lead mt-4">
-                Thank You for taking the test. Your results have been sent for analysis. You will be contacted shortly. Please quit your browser. 
-              </p>
+               Thank You for taking the tests. 
+            </p>
         </div>
         <!-- <script src="distressToleranceQuestions.js"></script> --> 
         <script type ="text/javascript">
-            let firstName = '';
-            let lastName = '';
             let questionEl = document.getElementById('questions');
             let questionsInHTML = '';
             let pointsPerCategory = [
@@ -149,6 +173,7 @@
                 {category: 'AP', points: 0},
                 {category: 'RE', points: 0}
             ]
+            let selectedAnswers = [];
             // To lerance: 1 3 5
             // Ab sorption: 2 4 15
             // Ap praisal: 6* 7 9 10 11 12 
@@ -382,52 +407,34 @@
             ]
             finalQuestions.map(function (question) {
                 let html = 
-                `<p id="${question.questionNumber}" class="m-2">${question.questionNumber}. ${question.questionDetails}</p>
-                <ul class="list-group m-4">
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" value=${question.answerAPoints} aria-label="${question.answerA}">
-                        ${question.answerA}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}B" value=${question.answerBPoints} aria-label="${question.answerB}">
-                        ${question.answerB}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}C" value=${question.answerCPoints} aria-label="${question.answerC}">
-                        ${question.answerC}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}D" value=${question.answerDPoints} aria-label="${question.answerD}">
-                        ${question.answerD}
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}E" value=${question.answerEPoints} aria-label="${question.answerE}">
-                        ${question.answerE}
-                    </li>
-                </ul>
+                `<label id="${question.questionNumber}" class="m-2 standard">${question.questionNumber}. ${question.questionDetails}</label>
+                    <div class="likert">
+                        <label class="list-group-item">
+                            <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" value=${question.answerAPoints} aria-label="${question.answerA}">
+                            <span>${question.answerA}</span>
+                        </label>
+                        <label class="list-group-item">
+                            <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}B" value=${question.answerBPoints} aria-label="${question.answerB}">
+                            <span>${question.answerB}</span>
+                        </label>
+                        <label class="list-group-item">
+                            <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}C" value=${question.answerCPoints} aria-label="${question.answerC}">
+                            <span>${question.answerC}</span>
+                        </label>
+                        <label class="list-group-item">
+                            <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}D" value=${question.answerDPoints} aria-label="${question.answerD}">
+                            <span>${question.answerD}</span>
+                        </label>
+                        <label class="list-group-item">
+                            <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}E" value=${question.answerEPoints} aria-label="${question.answerE}">
+                            <span>${question.answerE}</span>
+                        </label>
+                    </div>
                 `
                 questionsInHTML += html;
                 return;
             });
             questionEl.innerHTML = questionsInHTML;
-
-            // Logging into form. Will start timer here. 
-            function logInClicked() {
-                firstName = document.getElementById('firstNameInput').value;
-                lastName = document.getElementById('lastNameInput').value;
-                let pass = document.getElementById("passwordInput").value;
-                if (pass == "aadi") {
-                    document.getElementById('welcome').classList.add('d-none');
-                    document.getElementById('questionnaire').classList.remove('d-none');
-                } else {
-                document.getElementById("error").innerHTML = `<div class="alert alert-danger" role="alert">
-                    Wrong password entered. Please try again.</div>`
-                }
-                // Get start time
-                startTime = new Date().getTime();
-                // console.log('startTime: ' + startTime)
-            }
-            
             function submitClicked(){   
                 let isQuestionAnswered;
                 let answeredQuestions = [];
@@ -439,6 +446,10 @@
                         for (let k = 0; k < mcq.length; k++) {
                             isQuestionAnswered = false
                             if(mcq[k].checked){
+                                
+                                let answerChecked = i + ': ' + mcq[k].getAttribute("aria-label") + '. ';
+                                selectedAnswers += answerChecked
+
                                 pointsPerCategory[j].points += parseInt(mcq[k].value)
                                 isQuestionAnswered = true
                                 answeredQuestions.push(i)
@@ -452,6 +463,7 @@
 
                     for (var i = 1; i <= count; i++) {
                         if (answeredQuestions.indexOf(i) == -1) {
+                            document.getElementById(i).innerHTML += `<span class="bg-danger">Required!</span>`
                             missing.push(i);
                         }
                     }
@@ -463,29 +475,30 @@
             }
             // Send Results to Google Spreadsheet
             function sendResultsToSpreadsheet(){
+                document.getElementById('questionnaire').classList.add('d-none');
+                let matData = JSON.parse(localStorage.getItem('matData'));
                 let dataToSend = {
-                    "firstName":firstName,
-                    "lastName":lastName,
-                    "TO": pointsPerCategory[0].points,
-                    "AB": pointsPerCategory[1].points,
-                    "AP": pointsPerCategory[2].points,
-                    "RE": pointsPerCategory[3].points
+                    "fullName": localStorage.getItem('fullName'),
+                    "appraisal": pointsPerCategory[2].points,
+                    "tolerance": pointsPerCategory[0].points,
+                    "absorption": pointsPerCategory[1].points,
+                    "regulation": pointsPerCategory[3].points,
+                    "matTotalPoints": matData.totalPoints,
+                    "dtsSelectedAnswers": selectedAnswers,
+                    "matSelectedAnswers": matSelectedAnswers
                 }
                 fetch("https://api.apispreadsheets.com/data/CbdBfoshAonUcDsG/", {
                     method: "POST",
-                    body: JSON.stringify({"data": dataToSend}),
+                    body: JSON.stringify({"data":dataToSend}),
                 }).then(res =>{
                     if (res.status === 201){
                         // SUCCESS
-                        console.log('Success')
                     }
                     else{
                         // ERROR
-                        console.log('Error')
                     }
                 })
                 setTimeout(function () {
-                    document.getElementById('questionnaire').classList.add('d-none');
                     document.getElementById('thankyou').classList.remove('d-none');
                 }, 5000);
             }
