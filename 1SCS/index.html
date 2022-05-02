@@ -81,12 +81,10 @@
         <div id="questionnaire" class="container px-4 overflow-hidden">
             <div class="row d-inline-flex p-2 justify-content-center">
                 <h1>Faculty Minds SCS Test</h1>
-                <h4 class="text-danger">For testing purposes only</h4>
             </div>  
             <div class="row">
                 <p>Rules:</p>
                 <ul class="list-group">
-                    <li class="list-group-item text-danger">*For testing purposes: This form will submit even if all the answers are not selected.* </li>
                     <li class="list-group-item">You must answer all questions to be able to submit the form. </li>
                     <li class="list-group-item">There are 4 quizzes. You must answer all the questions in each quiz to move to the next one.</li>
                   </ul>
@@ -95,9 +93,6 @@
                 <form>
                     <div class="col-md-auto row gx-5" id="questions"></div>
                 </form>
-            </div>
-            <div class="row gx-5" id="results">
-                <!-- After submit is clicked -->
             </div>
             <div class="row mt-4">
                 <p class="text-danger" id="submitBtnErrMsg">
@@ -186,7 +181,6 @@
 
                     for (var i = 1; i <= count; i++) {
                         if (answeredQuestions.indexOf(i) == -1) {
-                            //document.getElementById(i).classList.add('bg-warning');
                             document.getElementById(i).innerHTML += `<span class="bg-danger">Required!</span>`
                             missing.push(i);
                         }

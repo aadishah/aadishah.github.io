@@ -84,7 +84,6 @@
             <div class="row">
                 <p>Rules:</p>
                 <ul class="list-group">
-                    <li class="list-group-item text-danger">*For testing purposes: This form will submit even if all the answers are not selected.* </li>
                     <li class="list-group-item">You must answer all questions to be able to submit the form. </li>
                 </ul>
             </div>
@@ -92,9 +91,6 @@
                 <form>
                     <div class="col-md-auto row gx-5" id="questions"></div>
                 </form>
-            </div>
-            <div class="row gx-5" id="results">
-                <!-- After submit is clicked -->
             </div>
             <div class="row mt-4">
                 <p class="text-danger" id="submitBtnErrMsg">
@@ -115,7 +111,6 @@
         <script type ="text/javascript">
             let questionEl = document.getElementById('questions');
             let questionsInHTML = '';
-            let isQuestionAnswered;
             let answeredQuestions = [];
             let selectedAnswers = [];
             let totalPoints;
@@ -168,14 +163,12 @@
                         let elName = i + pointsPerCategory[j].category;
                         let mcq = document.getElementsByName(elName);
                         for (let k = 0; k < mcq.length; k++) {
-                            isQuestionAnswered = false
                             if(mcq[k].checked){
                                 // Get value selected
                                 let answerChecked = i + ': ' + mcq[k].getAttribute("aria-label") + '. ';
                                 selectedAnswers += answerChecked
-                                //Get Points
+                                //Add Points
                                 pointsPerCategory[j].points += parseInt(mcq[k].value)
-                                isQuestionAnswered = true
                                 answeredQuestions.push(i)
                             }
                         }
@@ -221,7 +214,7 @@
                     "PWB Selected Answers":selectedAnswers,
                     "SCS Selected Answers":scsData.scsAnswers
                 }
-
+                localStorage.setItem('fullName', localStorage.getItem('fullName'))
                 fetch("https://api.apispreadsheets.com/data/H0Swcn8e7V5ezc6u/", { // SCS + PWB 
                     //method: "POST",
                     body: JSON.stringify({"data":dataToSend}),

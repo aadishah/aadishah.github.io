@@ -137,7 +137,6 @@
             <div class="row">
                 <p>Rules:</p>
                 <ul class="list-group">
-                    <li class="list-group-item text-danger">*For testing purposes: This form will submit even if all the answers are not selected.* </li>
                     <li class="list-group-item">You must answer all questions to be able to submit the form. </li>
                   </ul>
             </div>
@@ -146,16 +145,13 @@
                     <div class="col-md-auto row gx-5" id="questions"></div>
                 </form>
             </div>
-            <div class="row gx-5" id="results">
-                <!-- After submit is clicked -->
-            </div>
             <div class="row mt-4">
                 <p class="text-danger" id="submitBtnErrMsg">
                 <!-- Reason why submit button cannot be clicked.  -->
                 </p>
             </div>
             <div class="row d-inline-flex p-10 justify-content-center gy-5">
-                <button id="submitButton" type="button" class="btn btn-primary" onclick="submitClicked()">Submit</button> 
+                <button id="submitButton" type="submit" class="btn btn-primary" onclick="submitClicked()">Submit</button> 
             </div>
         </div>
         <div id="thankyou" class="container px-4 overflow-hidden d-none">
