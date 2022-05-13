@@ -156,7 +156,7 @@
         </div>
         <div id="thankyou" class="container px-4 overflow-hidden d-none">
             <p class="lead mt-4">
-               Thank You for taking the tests. 
+               Thank You for taking the tests. We will contact you shortly. Please close the browser.
             </p>
         </div>
         <!-- <script src="distressToleranceQuestions.js"></script> --> 
@@ -403,7 +403,7 @@
             ]
             finalQuestions.map(function (question) {
                 let html = 
-                `<label id="${question.questionNumber}" class="m-2 standard">${question.questionNumber}. ${question.questionDetails}</label>
+                `<label id="${question.questionNumber}" class="m-2 standard fs-5">${question.questionNumber}. ${question.questionDetails}</label>
                     <div class="likert">
                         <label class="list-group-item">
                             <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" value=${question.answerAPoints} aria-label="${question.answerA}">
@@ -481,7 +481,7 @@
                     "regulation": pointsPerCategory[3].points,
                     "matTotalPoints": matData.totalPoints,
                     "dtsSelectedAnswers": selectedAnswers,
-                    "matSelectedAnswers": matSelectedAnswers
+                    "matSelectedAnswers": matData.matSelectedAnswers
                 }
                 fetch("https://api.apispreadsheets.com/data/CbdBfoshAonUcDsG/", {
                     method: "POST",

@@ -124,7 +124,7 @@
             ]
             finalQuestions.map(function (question) {
                 let html = 
-                    `<label id="${question.questionNumber}" class="m-2 standard">${question.questionNumber}. ${question.questionDetails}</label>
+                    `<label id="${question.questionNumber}" class="m-2 standard fs-5">${question.questionNumber}. ${question.questionDetails}</label>
                     <div class="likert">
                         <label class="list-group-item">
                             <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" value=${question.answerAPoints} aria-label="${question.answerA}">

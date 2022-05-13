@@ -24,6 +24,43 @@
             .background {
                 background-color: #dee2e6;
             }
+            html,body {padding:0;margin:0;}
+ .likerts {
+  list-style:none;
+  width:100%;
+  margin:0;
+  padding:0 0 35px;
+  display:block;
+  border-bottom:2px solid #efefef;
+}
+ .likerts:last-of-type {border-bottom:0;}
+ .likerts:before {
+  content: '';
+  position:relative;
+  top:11px;
+  left:6%;
+  display:block;
+  background-color:#efefef;
+  height:4px;
+  width:80.5%;
+}
+ .likerts li {
+  display:inline-block;
+  width:13%;
+  text-align:center;
+  vertical-align: top;
+}
+.likerts li input[type=radio] {
+  display:block;
+  position:relative;
+  top:0;
+  left:50%;
+  margin-left:-6px;
+  
+}
+ .likerts li label {width:100%;}
+
+
 
             .likert {
                 --likert-rows: 7;
@@ -115,37 +152,33 @@
             let selectedAnswers = [];
             // Add Question1 
             questionsInHTML = ` 
-            <label id="1" class="m-2 standard">1. Seclect degree of Happiness</label>
-            <div class="likert">
-                <label class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1A" value=0 aria-label="Very Unhappy">
-                    <span>Very Unhappy</span>
-                </label>
-                <label class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1B" value=2 aria-label=".">
-                    <span>.</span>
-                </label>
-                <label class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1C" value=7 aria-label=".">
-                    <span>.</span>
-                </label>
-                <label class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1D" value=15 aria-label="Happy">
-                    <span>Happy</span>
-                </label>
-                <label class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1E" value=20 aria-label=".">
-                    <span>.</span>
-                </label>
-                <label class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1F" value=25 aria-label=".">
-                    <span>.</span>
-                </label>
-                <label class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1G" value=35 aria-label="Perfectly Happy">
-                    <span>Perfectly Happy</span>
-                </label>
-            </div>`;
+            <label id="1" class="m-2 standard  fs-5">1. Select degree of Happiness</label>
+            <ul class="likerts">
+                <li>
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1A" value=0 aria-li="Very Unhappy">
+                    <label>Very Unhappy</label>
+                </li>
+                <li>
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1B" value=2 aria-li=".">
+                </li>
+                <li>
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1C" value=7 aria-li=".">
+                </li>
+                <li>
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1D" value=15 aria-li="Happy">
+                    <label>Happy</label>
+                </li>
+                <li>
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1E" value=20 aria-li=".">
+                </li>
+                <li>
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1F" value=25 aria-li=".">
+                </li>
+                <li>
+                    <input class="form-check-input me-1" type="radio" name="1ALL" id="1G" value=35 aria-li="Perfectly Happy">
+                    <label>Perfectly Happy</label>
+                </li>
+            </ul>`;
             // Questions 2 -9 
             let questions2To9 = [
                 {
@@ -287,7 +320,7 @@
             ];
             questions2To9.map(function (question) {
                 let questions2To9Html = 
-                `<label id="${question.questionNumber}" class="m-2 standard">${question.questionNumber}. ${question.questionDetails}</label>
+                `<label id="${question.questionNumber}" class="m-2 standard fs-5">${question.questionNumber}. ${question.questionDetails}</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" value=${question.answerAPoints} aria-label="${question.answerA}">
@@ -318,7 +351,7 @@
                 return;
             });
             let question10 = ` 
-                <label id="10" class="m-2 standard">10. When disagreements arise, they usually result in:</label>
+                <label id="10" class="m-2 standard fs-5">10. When disagreements arise, they usually result in:</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="10ALL" id="10A" value=0 aria-label="Husband giving in">
@@ -337,7 +370,7 @@
             // Add question 10 to html
             questionsInHTML += question10
             let question11 = ` 
-                <label id="11" class="m-2 standard">11. Do you and your mate engage in outside interests together?</label>
+                <label id="11" class="m-2 standard fs-5">11. Do you and your mate engage in outside interests together?</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="11ALL" id="11A" value=10 aria-label="All of them">
@@ -359,8 +392,8 @@
             // Add question 11 to html
             questionsInHTML += question11
             let question12 = ` 
-                <p class="m-2 standard">12. In leisure time: (Tick the appropriate option)</p><br>
-                <label id="12" class="m-2 standard">a. Do you generally prefer:</label>
+                <p class="m-2 standard fs-5">12. In leisure time: (Tick the appropriate option)</p><br>
+                <label id="12" class="m-2 standard fs-5">a. Do you generally prefer:</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="12ALL" id="12A" value="youGO" aria-label='To be "on the go"'>
@@ -373,7 +406,7 @@
                 </div>`;
             questionsInHTML += question12
             let question13 = `
-                <label id="13" class="m-2 standard">b. Does your mate generally prefer:</label>
+                <label id="13" class="m-2 standard fs-5">b. Does your mate generally prefer:</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="13ALL" id="13A" value="mateGo" aria-label='To be "on the go"'>
@@ -388,7 +421,7 @@
             // Add question 12 to html
             questionsInHTML += question13
             let question14 = ` 
-                <label id="14" class="m-2 standard">13. Do you ever wish you had not married?</label>
+                <label id="14" class="m-2 standard fs-5">13. Do you ever wish you had not married?</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="14ALL" id="14A" value=0 aria-label="Frequently">
@@ -409,7 +442,7 @@
                 </div>`;
             questionsInHTML += question14
             let question15 = ` 
-                <label id="15" class="m-2 standard">14. If you had your life to live over, do you think you would:</label>
+                <label id="15" class="m-2 standard fs-5">14. If you had your life to live over, do you think you would:</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="15ALL" id="15A" value=15 aria-label="Marry the same person">
@@ -426,7 +459,7 @@
                 </div>`;
             questionsInHTML += question15
             let question16 = ` 
-                <label id="16" class="m-2 standard">15. Do you confide in your mate:</label>
+                <label id="16" class="m-2 standard fs-5">15. Do you confide in your mate:</label>
                 <div class="likert">
                     <label class="list-group-item">
                         <input class="form-check-input me-1" type="radio" name="16ALL" id="16A" value=0 aria-label="Almost never">
