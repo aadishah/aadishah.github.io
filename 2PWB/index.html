@@ -216,13 +216,14 @@
                 }
                 localStorage.setItem('fullName', localStorage.getItem('fullName'))
                 fetch("https://api.apispreadsheets.com/data/H0Swcn8e7V5ezc6u/", { // SCS + PWB 
-                    //method: "POST",
+                    method: "POST",
                     body: JSON.stringify({"data":dataToSend}),
                 }).then(res =>{
                     if (res.status === 201){
                         // SUCCESS
                     }
                     else{
+                        console.log('error PWB');
                         // ERROR
                     }
                 })
