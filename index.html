@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Faculty Minds</title>
 </head>
 <body>
     <div class="m-4" id="questionnaire">
@@ -18,50 +18,7 @@
         <p><b>Consent: </b>I agree to take part in this study, which has been explained to me. I have been given an opportunity to ask questions about the study. I understand that any questions I answer will be anonymous, and that my identity will not be disclosed at any point. I also understand that my participation is completely voluntary, and I may withdraw from the study at any time. I am 18 years old or over, and I am legally able to provide consent.
         </p>
         <h6>Kindly tick mark in the following boxes if you fit the below mentioned criteria:</h6>
-    
         <form>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Currently in an active marriage (Not separated or filed for divorce)" id="activeMarriage" required>
-                <label class="form-check-label" for="activeMarriage">
-                    Currently in an active marriage (Not separated or filed for divorce)
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="3+ years of marriage" id="3yearMarriage" required>
-                <label class="form-check-label" for="3yearMarriage">
-                    3+ years of marriage
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Full time employed with 5+ years of work experience" id="fullTime" required>
-                <label class="form-check-label" for="fullTime">
-                    Full time employed with 5+ years of work experience
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Between 30 to 45 years age group" id="30To45AgeGroup" required>
-                <label class="form-check-label" for="30To45AgeGroup">
-                    Between 30 to 45 years age group
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Resident of India" id="residentOfIndia" required>
-                <label class="form-check-label" for="residentOfIndia">
-                    Resident of India
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Corporate Employee" id="corporateEmployee" required>
-                <label class="form-check-label" for="corporateEmployee">
-                    Corporate Employee
-                </label>
-            </div>
-            <div class="form-row">
-                <div class="mt-4">
-                    <label for="participantSign">Participant Signature: </label><input type="text" id="participantSign" class="form-control" placeholder="Full Name in Capital letters" required>
-                </div>
-            </div>
-            <h6 class="mt-4">Demographic Details:</h6>
             <div class="form-row mt-4">
                 <div>
                     <label for="fullName">Full Name: Mr. /Mrs.</label><input type="text" id="fullName" class="form-control" placeholder="Full Name in Capital letters" required>
@@ -69,154 +26,10 @@
             </div>
             <div class="form-row mt-4">
                 <div>
-                    <label for="age">Age:</label><input type="text" id="age" class="form-control" required>
+                    <label for="dob">Date of Birth:</label><input type="date" id="dob" class="form-control" required>
                 </div>
             </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="gender">Gender:</label><input type="text" id="gender" class="form-control" required>
-                </div>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="dob">DOB:</label><input type="text" id="dob" class="form-control" required>
-                </div>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="spouseName">Spouse Name:</label><input type="text" id="spouseName" class="form-control" required>
-                </div>
-            </div>
-            <div class="form-floating mt-4">
-                <p>Does your spouse hold a full-time working position, Please provide details:</p>
-                <textarea class="form-control mt-4" placeholder="Leave a comment here" id="spouseDetails" required></textarea>
-            </div>
-            <p class="form-row mt-4">Please click the correct box:</p>
-            <div class="btn-group" role="group" aria-label="Marriage Radio Toggle">
-                    <input class="form-check-input btn-check" type="radio" name="statusMarriage" id="Married" value="Married" required>
-                    <label class="form-check-label btn btn-outline-primary" for="Married">Married</label>
-                    <input class="form-check-input btn-check" type="radio" name="statusMarriage"  id="Separated" value="Separated" required>
-                    <label class="form-check-label btn btn-outline-primary" for="Separated">Separated</label>
-                    <input class="form-check-input btn-check" type="radio" name="statusMarriage"  id="Divorced" value="Divorced" required>
-                    <label class="form-check-label btn btn-outline-primary" for="Divorced">Divorced</label>
-            </div>
-            <p class="form-row mt-4">Please click the correct box:</p>
-            <div class="btn-group" role="group" aria-label="Count Marriage">
-                    <input class="form-check-input btn-check" type="radio" name="countMarriage" id="1Marriage" value="1st Marriage">
-                    <label class="form-check-label btn btn-outline-primary" for="1Marriage">1st Marriage</label>
-                    <input class="form-check-input btn-check" type="radio" name="countMarriage" id="2Marriage" value="2nd Marriage">
-                    <label class="form-check-label btn btn-outline-primary" for="2Marriage">2nd Marriage</label>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="yearsOfMarriage">Years of Current Marriage:</label><input type="text" id="yearsOfMarriage" class="form-control">
-                </div>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="arrangedLove">Arranged / Love:</label><input type="text" id="arrangedLove" class="form-control">
-                </div>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="religion">Religion:</label><input type="text" id="religion" class="form-control">
-                </div>
-            </div>
-            <p class="form-row mt-4">Family:</p>
-            <div class="btn-group" role="group" aria-label="Family Type">
-                <input class="form-check-input btn-check" type="checkbox" name="family" id="joint" value="Joint">
-                <label class="form-check-label btn btn-outline-primary" for="joint">Joint</label>
-                <input class="form-check-input btn-check" type="checkbox" name="family" id="nuclear" value="Nuclear">
-                <label class="form-check-label btn btn-outline-primary" for="nuclear">Nuclear</label>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="children">No. Of Children:</label><input type="text" id="children" class="form-control">
-                </div>
-            </div>
-            <div class="form-row mt-1">
-                <label for="inputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            
-            <div class="form-row mt-4">
-                <div>
-                    <label for="contact">Contact:</label><input type="text" id="contact" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-row mt-4">
-                <div>
-                    <label for="city">City:</label><input type="text" id="city" class="form-control">
-                </div>
-            </div>
-            <div class="form-floating mt-4">
-                <p>Address:</p>
-                <textarea class="form-control mt-4" placeholder="Leave a comment here" id="address"></textarea>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="education">Education:</label><input type="text" id="education" class="form-control">
-                </div>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="profession">Profession:</label><input type="text" id="profession" class="form-control">
-                </div>
-            </div>
-            <div class="form-row mt-4">
-                <div>
-                    <label for="organizationName">Organization Name (Optional):</label><input type="text" id="orgName" class="form-control">
-                </div>
-            </div>
-            <div class="form-check mt-4">
-                <input class="form-check-input" type="radio" name="employmentStatus" value="Self employed" id="selfEmployed">
-                <label class="form-check-label" for="selfEmployed">
-                    Self employed
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="employmentStatus" value="Self Employed Professional" id="selfEmployedProfessional">
-                <label class="form-check-label" for="selfEmployedProfessional">
-                    Self Employed Professional 
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="employmentStatus" value="Employed in a Business" id="employedInBusiness">
-                <label class="form-check-label" for="employedInBusiness">
-                    Employed in a Business
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="employmentStatus" value="Entrepreneur or Business Owner " id="entrepreneurOrBusinessOwner">
-                <label class="form-check-label" for="entrepreneurOrBusinessOwner">
-                    Entrepreneur or Business Owner 
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="employmentStatus" value="Government Employee " id="governmentEmployee">
-                <label class="form-check-label" for="governmentEmployee">
-                    Government Employee 
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="employmentStatus" value="" id="corporateEmployee">
-                <label class="form-check-label" for="corporateEmployee">
-                    Corporate Employee
-                </label>
-            </div>
-            <div class="form-row">
-                <div class="mt-4">
-                    <label for="participantSignature">Participant Signature: </label><input type="text" id="participantSignature" class="form-control" placeholder="Full Name in Capital letters">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="mt-4">
-                    <label for="date">Date: </label><input type="text" id="date" class="form-control" placeholder="Todays date">
-                </div>
-            </div>
-            <div class="form-row d-inline-flex mt-4">
+            <div class="form-row d-inline-flex mt-4 mb-5">
                 <button id="submitButton" type="submit" class="btn btn-primary" onclick="submitClicked()">Submit</button> 
             </div>
         </form>
@@ -229,107 +42,13 @@
     </div>
     <script>
         function submitClicked(){
-
-            // const inputFeilds = document.querySelectorAll("input");
-
-            // const validInputs = Array.from(inputFeilds).filter( input => input.value === "");
-
-            // console.log(validInputs)
-
-            localStorage.setItem('fullName', document.getElementById('fullName').value)
-
             document.getElementById('submitButton').disabled = true; 
-            // family
-            let familyValue;
-            if (document.getElementById('joint').checked) {
-                familyValue = document.getElementById('joint').value;
-            } else if(document.getElementById('nuclear').checked) {
-                familyValue = document.getElementById('nuclear').value;
-            }
-
-            let marriageValue;
-            if (document.getElementById('1Marriage').checked) {
-                marriageValue = document.getElementById('1Marriage').value;
-            } else if(document.getElementById('2Marriage').checked) {
-                marriageValue = document.getElementById('2Marriage').value;
-            }
-
-            let employmentStatus;
-            if (document.getElementById('selfEmployed').checked) {
-                employmentStatus = document.getElementById('selfEmployed').value;
-            } else if(document.getElementById('selfEmployedProfessional').checked) {
-                employmentStatus = document.getElementById('selfEmployedProfessional').value;
-            } else if(document.getElementById('employedInBusiness').checked) {
-                employmentStatus = document.getElementById('employedInBusiness').value;
-            } else if(document.getElementById('entrepreneurOrBusinessOwner').checked) {
-                employmentStatus = document.getElementById('entrepreneurOrBusinessOwner').value;
-            } else if(document.getElementById('governmentEmployee').checked) {
-                employmentStatus = document.getElementById('governmentEmployee').value;
-            } else if(document.getElementById('corporateEmployee').checked) {
-                employmentStatus = document.getElementById('corporateEmployee').value;
-            } 
-
-            let relationshipStatus;
-            if (document.getElementById('Married').checked) {
-                relationshipStatus = document.getElementById('Married').value;
-            } else if(document.getElementById('Separated').checked) {
-                relationshipStatus = document.getElementById('Separated').value;
-            } else if(document.getElementById('Divorced').checked) {
-                relationshipStatus = document.getElementById('Divorced').value;
-            }
-
-            let dataToSend = {
-                "age": document.getElementById("age").value,
-                "dob": document.getElementById("dob").value,
-                "city":document.getElementById("city").value,
-                "date":document.getElementById("date").value,
-                "email":document.getElementById("inputEmail1").value,
-                "family":familyValue,
-                "gender":document.getElementById("gender").value,
-                "address":document.getElementById("address").value,
-                "contact":document.getElementById("contact").value,
-                "orgName":document.getElementById("orgName").value,
-                "children":document.getElementById("children").value,
-                "fullName":document.getElementById("fullName").value,
-                "fullTime":document.getElementById("fullTime").value,
-                "marriage":marriageValue,
-                "religion":document.getElementById("religion").value,
-                "education":document.getElementById("education").value,
-                "profession":document.getElementById("profession").value,
-                "spouseName":document.getElementById("spouseName").value,
-                "arrangedLove":document.getElementById("arrangedLove").value,
-                "3yearMarriage":document.getElementById("3yearMarriage").value,
-                "spouseDetails":document.getElementById("spouseDetails").value,
-                "30To45AgeGroup":document.getElementById("30To45AgeGroup").value,
-                "activeMarriage":document.getElementById("activeMarriage").value,
-                "participantSign":document.getElementById("participantSign").value,
-                "residentOfIndia":document.getElementById("residentOfIndia").value,
-                "yearsOfMarriage":document.getElementById("yearsOfMarriage").value,
-                "employmentStatus":employmentStatus,
-                "corporateEmployee":document.getElementById("corporateEmployee").value,
-                "relationshipStatus":relationshipStatus,
-                "participantSignature":document.getElementById("participantSignature").value
-            }
-            sendResultsToSpreadsheet(dataToSend)
-        }
-        function sendResultsToSpreadsheet(dataToSend){
-            console.log('hello')
-            console.log(dataToSend)
-            fetch("https://api.apispreadsheets.com/data/tI8wdBf2qe3vIlU5/", {
-                method: "POST",
-                body: JSON.stringify({"data": dataToSend}),
-            }).then(res =>{
-                if (res.status === 201){
-                    // SUCCESS
-                }
-                else{
-                    // ERROR
-                }
-            })
+            localStorage.setItem('fullName', document.getElementById('fullName').value)
+            localStorage.setItem('DOB', document.getElementById('dob').value);
             setTimeout(function () {
                 document.getElementById('thankyou').classList.remove('d-none');
                 document.getElementById('questionnaire').classList.add('d-none');
-            }, 5000);
+            }, 1000);
         }
     </script>
 </body>

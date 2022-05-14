@@ -223,7 +223,7 @@
                 {
                 "personalityTrait": "AB",
                 "questionNumber": 4,
-                "questionDetails": "My feelings of distress are so intense that they completely take over. 5.There’s nothing worse than feeling distressed or upset",
+                "questionDetails": "My feelings of distress are so intense that they completely take over.",
                 "answerA": "Strongly Agree",
                 "answerAPoints": 1,
                 "answerB": "Mildly Agree",
@@ -238,7 +238,7 @@
                 {
                 "personalityTrait": "TO",
                 "questionNumber": 5,
-                "questionDetails": "There’s nothing worse than feeling distressed or upset",
+                "questionDetails": "There is nothing worse than feeling distressed or upset",
                 "answerA": "Strongly Agree",
                 "answerAPoints": 1,
                 "answerB": "Mildly Agree",
@@ -465,6 +465,7 @@
                     }
                     document.getElementById('submitBtnErrMsg').innerHTML = "Please answer these questions: " + missing.join(', ')
                     alert('You must answer all questions in order to submit quiz.');
+                    document.getElementById('submitButton').disabled = false; 
                 } else {
                     sendResultsToSpreadsheet();
                 }
@@ -496,7 +497,7 @@
                 })
                 setTimeout(function () {
                     document.getElementById('thankyou').classList.remove('d-none');
-                }, 5000);
+                }, 3000);
             }
         </script>
     </body>

@@ -202,6 +202,7 @@
                     "IND":scsData.IND,
                     "INT":scsData.INT,
                     "PIL":pointsPerCategory[4].points,
+                    "dob":localStorage.getItem('DOB'),
                     "AUTO":pointsPerCategory[0].points,
                     "TOTAL":totalPoints,
                     "ENVMAS":pointsPerCategory[1].points,
@@ -230,7 +231,7 @@
                 setTimeout(function () {
                     document.getElementById('questionnaire').classList.add('d-none');
                     document.getElementById('thankyou').classList.remove('d-none');
-                }, 5000);
+                }, 3000);
             }
         </script>
     </body>
