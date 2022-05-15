@@ -396,7 +396,7 @@
                 <label id="12" class="m-2 standard fs-5">a. Do you generally prefer:</label>
                 <div class="likert">
                     <label class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="12ALL" id="12A" value="youGO" aria-label='To be "on the go"'>
+                        <input class="form-check-input me-1" type="radio" name="12ALL" id="12A" value="youGo" aria-label='To be "on the go"'>
                         <span>To be "on the go"</span>
                     </label>
                     <label class="list-group-item">
@@ -534,12 +534,12 @@
                         selectedAnswers += answerChecked
                     }
                 }
-
-                if(finalAnswer12 == "youGo" && finalAnswer13 == "mateGo") {
+                if(finalAnswer12 === "youGo" && finalAnswer13 === "mateGo") {
+                    console.log('Hello im here')
                     totalPoints += parseInt(3)
-                } else if(finalAnswer12 == "youHome" && finalAnswer13 == "mateHome") {
+                } else if(finalAnswer12 === "youHome" && finalAnswer13 === "mateHome") {
                     totalPoints += parseInt(10)
-                }else if((finalAnswer12 == "youHome" && finalAnswer13 == "mateGo")&&(finalAnswer12 == "youGo" && finalAnswer12B == "mateHome")){
+                }else if((finalAnswer12 === "youHome" && finalAnswer13 === "mateGo")&&(finalAnswer12 === "youGo" && finalAnswer12B === "mateHome")){
                     totalPoints += parseInt(2)
                 }
                 if (answeredQuestions.length < 15) {

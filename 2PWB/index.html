@@ -165,7 +165,7 @@
                         for (let k = 0; k < mcq.length; k++) {
                             if(mcq[k].checked){
                                 // Get value selected
-                                let answerChecked = i + ': ' + mcq[k].getAttribute("aria-label") + '. ';
+                                let answerChecked = mcq[k].getAttribute("id") + ': ' + mcq[k].getAttribute("aria-label") + '. ';
                                 selectedAnswers += answerChecked
                                 //Add Points
                                 pointsPerCategory[j].points += parseInt(mcq[k].value)
