@@ -72,8 +72,8 @@
                     <li class="list-group-item">Ideally, you shouldnt take more than 35 mins to complete this test. </li>
                   </ul>
             </div>
-            <div class="row mt-4">
-                <p id="questionsWithBSelcted" class="lead"></p>
+            <div id="questionsWithBSelcted" class="row mt-4 alert alert-primary" role="alert">
+                <p>Question Number's where B is selected:</p>
             </div>
             <div class="d-inline-flex p-2 justify-content-end fixed-top">
                 <h3 id="howManyBs"> 
@@ -103,8 +103,9 @@
                 Thank You for taking the test. Your results have been sent for analysis. You will be contacted shortly. Please quit your browser. 
               </p>
         </div>
-        <script src="distressToleranceQuestions.js"></script>
+        <script src="finalQuestions.js"></script>
         <script type ="text/javascript">
+            //const openpgp = require('openpgp');
             let firstName = '';;
             let lastName = '';;
             let questionEl = document.getElementById('questions');
@@ -137,15 +138,15 @@
                 `<p id="${question.questionNumber}" class="m-2">${question.questionNumber}. ${question.questionDetails}</p>
                 <ul class="list-group m-4">
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" onclick="checkforB()" value=${question.answerAPoints} aria-label="${question.answerA}">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" onclick="checkforB(${question.questionNumber})" value=${question.answerAPoints} aria-label="${question.answerA}">
                         A. ${question.answerA}
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}B" onclick="checkforB()" value=${question.answerBPoints} aria-label="${question.answerB}">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}B" onclick="checkforB(${question.questionNumber})" value=${question.answerBPoints} aria-label="${question.answerB}">
                         B. ${question.answerB}
                     </li>
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}C" onclick="checkforB()" value=${question.answerCPoints} aria-label="${question.answerC}">
+                        <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}C" onclick="checkforB(${question.questionNumber})" value=${question.answerCPoints} aria-label="${question.answerC}">
                         C. ${question.answerC}
                     </li>
                 </ul>
@@ -174,18 +175,20 @@
             
             // Checking for B
             function checkforB(){   
-                console.log('hello its me')
                 let questionsWhereBIsSelected = [];
-                let countOfB = 0;
+                let countOfB = 0; 
                 for (let i = 1; i < finalQuestions.length+1; i++) {
                     let questionNo = i + 'B';
                     let checkIfB = document.getElementById(questionNo);
                     if (checkIfB.checked) {
                         countOfB += 1;
-                        questionsWhereBIsSelected.push(finalQuestions[i-1].questionNumber);
+                        questionsWhereBIsSelected.push(finalQuestions[i-1].questionNumber)
+                        document.getElementById(i).classList.add('text-danger');
                     } 
+                    else {
+                        document.getElementById(i).classList.remove('text-danger');
+                    }
                 }
-                highlightQuestionsWithB();
                 checkCurrentTime();
                 howManyBs.innerHTML = 'B\'s: ' + countOfB + '/12';
                 if(countOfB>12){
@@ -194,13 +197,13 @@
                     document.getElementById('submitButton').disabled = true;
                     document.getElementById('howManyBs').classList.remove('howManyBsValid');
                     document.getElementById('howManyBs').classList.add('howManyBsInvalid');
-                    document.getElementById('questionsWithBSelcted').innerHTML = "Question Number's where B is selected: " + questionsWhereBIsSelected.join(', ') + '.'
+                    document.getElementById('questionsWithBSelcted').innerHTML = "<p>Question Number's where B is selected: " + questionsWhereBIsSelected.join(', ') + "</p>";
                 } else {
                     document.getElementById('submitBtnErrMsg').innerHTML = ""
                     document.getElementById('submitButton').disabled = false;
                     document.getElementById('howManyBs').classList.remove('howManyBsInvalid');
                     document.getElementById('howManyBs').classList.add('howManyBsValid');
-                    document.getElementById('questionsWithBSelcted').innerHTML = "Question Number's where B is selected: " + questionsWhereBIsSelected.join(', ') + '.'
+                    document.getElementById('questionsWithBSelcted').innerHTML = "<p>Question Number's where B is selected: " + questionsWhereBIsSelected.join(', ') + "</p>";
                 }
             }
             function checkCurrentTime() {
@@ -262,9 +265,7 @@
             // Send Results to Google Spreadsheet
             function sendResultsToSpreadsheet(){
                 let timeTaken = millisToMinutesAndSeconds(timeDiff);
-                let dataToSend = {
-                    "firstName":firstName,
-                    "lastName":lastName,
+                let dataToSend = {    
                     "A": pointsPerCategory[0].points,
                     "B": pointsPerCategory[1].points,
                     "C": pointsPerCategory[2].points,
@@ -281,9 +282,11 @@
                     "Q2": pointsPerCategory[13].points,
                     "Q3": pointsPerCategory[14].points,
                     "Q4": pointsPerCategory[15].points,
+                    "lastName":lastName,
+                    "firstName":firstName,
                     "timeTaken": timeTaken
                 }
-                fetch("https://api.apispreadsheets.com/data/15932/", {
+                fetch("https://api.apispreadsheets.com/data/H0Swcn8e7V5ezc6u/", {
                     method: "POST",
                     body: JSON.stringify({"data": dataToSend}),
                 }).then(res =>{
@@ -292,6 +295,23 @@
                         console.log('Success')
                     }
                     else{
+                        // let textToBLOB = new Blob([dataToSend], { type: 'text/plain' });
+                        // let sFileName = 'formData.txt';	
+                        // // If the internet drops, then create a file with results. make it a Password lock file
+                        // // Download the file. Have the user send the file to siddhi
+                        // let newLink = document.createElement("a");
+                        // newLink.download = sFileName;
+
+                        // if (window.webkitURL != null) {
+                        //     newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+                        // }
+                        // else {
+                        //     newLink.href = window.URL.createObjectURL(textToBLOB);
+                        //     newLink.style.display = "none";
+                        //     document.body.appendChild(newLink);
+                        // }
+
+                        // newLink.click(); 
                         // ERROR
                         console.log('Error')
                     }
