@@ -136,16 +136,16 @@
             finalQuestions.map(function (question) {
                 let html = 
                 `<p id="${question.questionNumber}" class="m-2">${question.questionNumber}. ${question.questionDetails}</p>
-                <ul class="list-group m-4">
-                    <li class="list-group-item">
+                <ul class="list-group d-flex flex-row">
+                    <li class="list-group-item d-flex">
                         <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}A" onclick="checkforB(${question.questionNumber})" value=${question.answerAPoints} aria-label="${question.answerA}">
                         A. ${question.answerA}
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item d-flex">
                         <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}B" onclick="checkforB(${question.questionNumber})" value=${question.answerBPoints} aria-label="${question.answerB}">
                         B. ${question.answerB}
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item d-flex">
                         <input class="form-check-input me-1" type="radio" name="${question.questionNumber}${question.personalityTrait}" id="${question.questionNumber}C" onclick="checkforB(${question.questionNumber})" value=${question.answerCPoints} aria-label="${question.answerC}">
                         C. ${question.answerC}
                     </li>
