@@ -28,7 +28,7 @@ let finalQuestions = [
     "answerA": "in a sociable suburb,",
     "answerAPoints": 2,
     "answerB": "in between,",
-    "answerBPoints": 1,
+    "answerBPoints": 2,
     "answerC": "alone in the deep woods.",
     "answerCPoints": 0
   },
