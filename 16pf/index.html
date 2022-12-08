@@ -70,7 +70,7 @@
                 //dateOfBirth = new Date(dateOfBirth);
                 let demographics = {fullName, age, dateOfBirth, email, gender};
                 localStorage.setItem('demographics', JSON.stringify(demographics));
-                window.location.href="./main.html";
+                window.location.href="./questions.html";
             } else {
                 document.getElementById('submitButton').disabled = false;
             }
